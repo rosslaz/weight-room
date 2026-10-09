@@ -52,6 +52,7 @@ export default function SignIn() {
   return (
     <div className="signin">
       <div className="signin-board">
+        <img className="signin-logo" src="/falcon.png" alt="" width={112} height={112} />
         <h1 className="signin-title">{APP_NAME}</h1>
         <p className="signin-lede">See the day's workout and log your weights. Last time's numbers are waiting for you.</p>
 

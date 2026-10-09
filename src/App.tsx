@@ -63,7 +63,10 @@ function SignedInApp({ uid, isAdmin }: { uid: string; isAdmin: boolean }) {
   return (
     <div className="shell">
       <header className="topbar">
-        <span className="wordmark">{APP_NAME}</span>
+        <span className="wordmark">
+          <img src="/falcon.png" alt="" width={34} height={34} />
+          {APP_NAME}
+        </span>
         <SyncStatus uid={uid} />
       </header>
       <main className="main">

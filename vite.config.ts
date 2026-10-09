@@ -10,7 +10,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: false,
-      includeAssets: ['icon.svg', 'favicon-32.png', 'apple-touch-icon.png'],
+      includeAssets: ['falcon.png', 'favicon-32.png', 'apple-touch-icon.png'],
       manifest: {
         name: APP_NAME,
         short_name: APP_NAME,
@@ -19,8 +19,8 @@ export default defineConfig({
         scope: '/',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#f3f5f6',
-        theme_color: '#f3f5f6',
+        background_color: '#00402a',
+        theme_color: '#00402a',
         icons: [
           { src: '/pwa-192.png', sizes: '192x192', type: 'image/png' },
           { src: '/pwa-512.png', sizes: '512x512', type: 'image/png' },

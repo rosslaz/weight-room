@@ -58,7 +58,10 @@ Key pieces:
 `supabase/functions/email-login` creates the account on first use and returns a one-time token, which the app exchanges
 for a normal Supabase session. It's deployed with JWT verification off because callers aren't signed in yet.
 
-## Regenerate app icons
+## App icons and logo
+
+The team logo is `public/falcon.png`; the install icons are generated from it. To use a sharper logo, replace that file
+(500px or larger, transparent background) and run:
 
 ```powershell
 node scripts/icons.mjs

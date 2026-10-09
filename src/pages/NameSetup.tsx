@@ -27,6 +27,7 @@ export default function NameSetup() {
   return (
     <div className="signin">
       <div className="signin-board">
+        <img className="signin-logo" src="/falcon.png" alt="" width={112} height={112} />
         <h1 className="signin-title">What's your name?</h1>
         <p className="signin-lede">Your coach sees this name. Your logged weights stay private to you.</p>
         <form onSubmit={save} className="stack">

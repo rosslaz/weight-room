@@ -1,5 +1,5 @@
-/* Weight Room: the coach's whiteboard, in your pocket.
-   Marker blue for what's planned, marker green for what's done, and last
+/* Weight Room: the coach's whiteboard, in team colors.
+   Falcon green for what's planned, gold for what's done, and last
    session's numbers left faintly on the board like a half-erased ghost. */
 
 :root {
@@ -9,11 +9,15 @@
   --line-strong: #b7c1ca;
   --ink: #17202a;
   --ink-2: #4b5765;
-  --ghost: #a3aeb9;
-  --blue: #1e44be;
-  --blue-soft: #e6ebfa;
-  --green: #0e7a55;
-  --green-soft: #e2f2ea;
+  --ghost: #8d98a4;
+  /* Falcon green and gold, sampled from the team logo */
+  --green: #00592e;
+  --green-deep: #00402a;
+  --green-soft: #e3efe8;
+  --done: #eac20f;
+  --done-edge: #c49f0b;
+  --done-ink: #6b5200;
+  --done-soft: #fbf1c4;
   --red: #bf2f28;
   --red-soft: #fbe9e7;
   --note: #fff1b8;
@@ -59,7 +63,7 @@ p {
 }
 
 a {
-  color: var(--blue);
+  color: var(--green);
 }
 
 button {
@@ -81,8 +85,13 @@ select {
 }
 
 :focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--green);
   outline-offset: 2px;
+}
+
+.signin :focus-visible,
+.topbar :focus-visible {
+  outline-color: var(--done);
 }
 
 .sr-only {
@@ -98,7 +107,12 @@ select {
 
 .splash {
   min-height: 100dvh;
-  background: var(--board);
+  background: var(--green-deep);
+  color: #cfe0d6;
+}
+
+.splash .muted {
+  color: inherit;
 }
 
 .splash-wait {
@@ -119,22 +133,31 @@ select {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: calc(env(safe-area-inset-top) + 10px) var(--gutter) 10px;
-  background: var(--board);
-  border-bottom: 1px solid var(--line);
+  padding: calc(env(safe-area-inset-top) + 8px) var(--gutter) 8px;
+  background: var(--green-deep);
+  color: #fff;
+  border-bottom: 3px solid var(--done);
 }
 
 .wordmark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--display);
   font-weight: 700;
-  font-size: 21px;
+  font-size: 22px;
   letter-spacing: 0.01em;
+}
+
+.wordmark img {
+  width: 34px;
+  height: 34px;
 }
 
 .sync {
   font-size: 14px;
   font-weight: 500;
-  color: var(--ink-2);
+  color: rgba(255, 255, 255, 0.78);
   border: 0;
   background: none;
   padding: 0;
@@ -142,7 +165,7 @@ select {
 }
 
 .sync-ok {
-  color: var(--green);
+  color: var(--done);
 }
 
 .sync-offline {
@@ -153,7 +176,7 @@ select {
 }
 
 .sync-error {
-  color: var(--red);
+  color: #ffd2cc;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -203,7 +226,7 @@ select {
 }
 
 .tab-active {
-  color: var(--blue);
+  color: var(--green);
 }
 
 .tab-active::before {
@@ -214,7 +237,7 @@ select {
   right: 28%;
   height: 3px;
   border-radius: 0 0 3px 3px;
-  background: var(--blue);
+  background: var(--green);
 }
 
 /* ---------- shared bits ---------- */
@@ -325,8 +348,8 @@ select {
   padding: 0 7px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--blue);
-  background: var(--blue-soft);
+  color: var(--green);
+  background: var(--green-soft);
   border-radius: 5px;
   vertical-align: 2px;
 }
@@ -354,8 +377,8 @@ select {
 }
 
 .btn-primary {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--green);
+  border-color: var(--green);
   color: #fff;
 }
 
@@ -387,7 +410,7 @@ select {
   background: none;
   border: 0;
   padding: 6px 0;
-  color: var(--blue);
+  color: var(--green);
   font-weight: 600;
   font-size: 15.5px;
   text-decoration: underline;
@@ -491,7 +514,7 @@ select {
 }
 
 .seg-on {
-  background: var(--ink);
+  background: var(--green-deep);
   color: #fff;
 }
 
@@ -502,6 +525,8 @@ select {
   display: grid;
   place-items: center;
   padding: 24px var(--gutter);
+  background: var(--green-deep);
+  color: #fff;
 }
 
 .signin-board {
@@ -509,18 +534,48 @@ select {
   max-width: 400px;
 }
 
+.signin-logo {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin: 0 0 14px -6px;
+}
+
 .signin-title {
   font-family: var(--display);
   font-weight: 700;
   font-size: 56px;
   line-height: 0.95;
-  color: var(--blue);
+  color: #fff;
 }
 
 .signin-lede {
   margin: 12px 0 28px;
-  color: var(--ink-2);
+  color: #cfe0d6;
   font-size: 18px;
+}
+
+.signin .field-label,
+.signin .hint {
+  color: #cfe0d6;
+}
+
+.signin .field input {
+  border-color: transparent;
+}
+
+.signin .btn-primary {
+  background: var(--done);
+  border-color: var(--done);
+  color: var(--green-deep);
+}
+
+.signin .btn-link {
+  color: var(--done);
+}
+
+.signin .note {
+  color: var(--done);
 }
 
 .code-input {
@@ -587,19 +642,23 @@ select {
 }
 
 .week-day.has-workout .week-dot {
-  background: var(--blue);
+  background: var(--green);
 }
 
 .week-day.is-today .week-num {
   text-decoration: underline;
-  text-decoration-color: var(--blue);
+  text-decoration-color: var(--green);
   text-decoration-thickness: 3px;
   text-underline-offset: 3px;
 }
 
 .week-day.is-selected {
-  background: var(--ink);
-  color: #c9d1d8;
+  background: var(--green-deep);
+  color: #cfe0d6;
+}
+
+.week-day.is-selected.is-today .week-num {
+  text-decoration-color: var(--done);
 }
 
 .week-day.is-selected .week-num {
@@ -607,7 +666,7 @@ select {
 }
 
 .week-day.is-selected.has-workout .week-dot {
-  background: #fff;
+  background: var(--done);
 }
 
 /* ---------- the day ---------- */
@@ -645,7 +704,7 @@ select {
   font-weight: 700;
   font-size: 30px;
   line-height: 1.05;
-  color: var(--blue);
+  color: var(--green);
 }
 
 .workout-notes {
@@ -658,12 +717,12 @@ select {
 .ex {
   margin: 26px 0 0;
   padding-left: 14px;
-  border-left: 4px solid var(--blue);
+  border-left: 4px solid var(--green);
   transition: border-color 200ms ease;
 }
 
 .ex-done {
-  border-left-color: var(--green);
+  border-left-color: var(--done);
 }
 
 .ex-head {
@@ -692,12 +751,12 @@ select {
   font-family: var(--display);
   font-weight: 600;
   font-size: 20px;
-  color: var(--blue);
+  color: var(--green);
   font-variant-numeric: tabular-nums;
 }
 
 .ex-done .ex-target {
-  color: var(--green);
+  color: var(--done-ink);
 }
 
 .ex-notes {
@@ -771,13 +830,13 @@ select {
 
 .num:focus {
   outline: none;
-  border-color: var(--blue);
-  box-shadow: 0 0 0 2px var(--blue);
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px var(--green);
 }
 
 .set-logged .num {
-  border-color: #9fd1bc;
-  background: #fbfefc;
+  border-color: #dcc25a;
+  background: #fffdf3;
 }
 
 .num-bad,
@@ -812,9 +871,9 @@ select {
 }
 
 .check-on {
-  background: var(--green);
-  border-color: var(--green);
-  color: #fff;
+  background: var(--done);
+  border-color: var(--done-edge);
+  color: var(--green-deep);
 }
 
 .set-remove {
@@ -996,7 +1055,7 @@ select {
 }
 
 .session-sets .is-top .figure {
-  color: var(--blue);
+  color: var(--green);
 }
 
 /* ---------- admin ---------- */
@@ -1018,8 +1077,8 @@ select {
 }
 
 .subnav-link.is-active {
-  color: var(--blue);
-  border-bottom-color: var(--blue);
+  color: var(--green);
+  border-bottom-color: var(--green);
 }
 
 .editor .back {
@@ -1035,7 +1094,7 @@ select {
 
 .edit-item {
   padding: 12px 0 14px 14px;
-  border-left: 4px solid var(--blue);
+  border-left: 4px solid var(--green);
   margin-bottom: 14px;
   counter-increment: item;
 }
