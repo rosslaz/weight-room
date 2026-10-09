@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useUser } from '../lib/auth'
 import { getQueue } from '../lib/offline'
 import { supabase } from '../lib/supabase'
@@ -8,6 +9,7 @@ import { getInstallPrompt, onInstallPromptChange, promptInstall } from '../lib/i
 export default function Account() {
   const { userId, email, profile, setProfile, signOut } = useUser()
   const online = useOnline()
+  const navigate = useNavigate()
   const [name, setName] = useState(profile?.display_name ?? '')
   const [saving, setSaving] = useState(false)
   const [msg, setMsg] = useState<string | null>(null)
@@ -100,7 +102,13 @@ export default function Account() {
             {pending === 1 ? 'it uploads' : 'they upload'} the next time you sign in on this phone.
           </p>
         )}
-        <button className="btn" onClick={() => void signOut()}>
+        <button
+          className="btn"
+          onClick={async () => {
+            navigate('/', { replace: true })
+            await signOut()
+          }}
+        >
           Sign out
         </button>
       </section>
