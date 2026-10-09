@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { AUTH_STORAGE_KEY, supabase } from './supabase'
 import { readJSON, writeJSON } from './offline'
 import type { Profile } from './data'
@@ -36,8 +36,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!error && data) {
       writeJSON(profileKey(uid), data)
       setState({ status: 'signedIn', userId: uid, email, profile: data })
+    } else if (!cached) {
+      // First launch on this phone with a bad connection: keep trying instead of sitting on a blank screen.
+      window.setTimeout(() => void loadProfileRef.current?.(uid, email), 4000)
     }
   }, [])
+  const loadProfileRef = useRef(loadProfile)
 
   useEffect(() => {
     let cancelled = false

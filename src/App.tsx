@@ -30,7 +30,12 @@ export default function App() {
   if (state.status === 'signedOut') return <SignIn />
   if (!state.profile?.display_name && navigator.onLine) {
     // Profile still loading from the server: wait rather than flash the name form.
-    if (!state.profile) return <div className="splash" aria-busy="true" aria-label="Loading" />
+    if (!state.profile)
+      return (
+        <div className="splash splash-wait" aria-busy="true">
+          <p className="muted">Connecting…</p>
+        </div>
+      )
     return <NameSetup />
   }
   return <SignedInApp uid={state.userId} isAdmin={!!state.profile?.is_admin} />

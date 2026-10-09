@@ -101,6 +101,11 @@ select {
   background: var(--board);
 }
 
+.splash-wait {
+  display: grid;
+  place-items: center;
+}
+
 .shell {
   min-height: 100dvh;
   padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 24px);
