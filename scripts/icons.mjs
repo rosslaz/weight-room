@@ -8,6 +8,6 @@ const out = [
   ['public/icon.svg', 'public/favicon-32.png', 32],
 ]
 for (const [src, dest, size] of out) {
-  await sharp(src, { density: 384 }).resize(size, size).png().toFile(dest)
+  await sharp(src, { density: 384 }).resize(size, size).png({ palette: true, colors: 16, compressionLevel: 9 }).toFile(dest)
   console.log('wrote', dest)
 }
